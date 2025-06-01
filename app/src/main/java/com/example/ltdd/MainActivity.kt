@@ -142,7 +142,7 @@ fun AppNavigator() {
             arguments = listOf(navArgument("userId") { type = NavType.StringType })
         ) { backStackEntry ->
             val userId = backStackEntry.arguments?.getString("userId") ?: ""
-            MomentsScreen(navController, userId)
+            SanPhamScreen(navController)
         }
         composable(
             "medical_record/{userId}",
@@ -173,6 +173,19 @@ fun AppNavigator() {
             val userId = backStackEntry.arguments?.getString("userId") ?: ""
             DauAnThaiKyScreen(navController, userId)
         }
-
+        composable(
+            "vitamin/{userId}",
+            arguments = listOf(navArgument("userId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId") ?: ""
+            BoSungVitaminScreen(navController, userId)
+        }
+        composable(
+            "plan/{userId}",
+            arguments = listOf(navArgument("userId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId") ?: ""
+           LapTrinhSinhScreen(navController, userId)
+        }
     }
     }

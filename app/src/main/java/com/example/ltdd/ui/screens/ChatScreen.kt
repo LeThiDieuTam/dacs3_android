@@ -77,7 +77,7 @@ interface ChatApiService {
 object ChatRetrofitInstance {
     val api: ChatApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("   https://cd89-2001-ee0-4b6d-f0a0-bc15-4b82-50c3-ee65.ngrok-free.app/mevabe_api/")
+            .baseUrl("   https://2629-2401-d800-f531-9420-9015-e99e-277c-272a.ngrok-free.app/mevabe_api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ChatApiService::class.java)

@@ -148,7 +148,6 @@ fun SoKhamThaiScreen(navController: NavHostController, userId: String) {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    // Nút Quay lại
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -182,13 +181,13 @@ fun SoKhamThaiScreen(navController: NavHostController, userId: String) {
                     elevation = CardDefaults.cardElevation(6.dp)
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Text("📅 Ngày khám: ${item.visitDate}") // Dùng thuộc tính của data class
+                        Text("📅 Ngày khám: ${item.visitDate}")
                         Text("👩‍⚕️ Bác sĩ: ${item.doctorName}")
                         Text("🍼 Tuổi thai: ${item.gestationalAge} tuần")
                         Text("⚖️ Cân nặng: ${item.weight} kg")
                         Text("💓 Huyết áp: ${item.bloodPressure}")
                         Text("❤️ Tim thai: ${item.fetalHeartRate}")
-                        Text("📝 Ghi chú: ${item.notes ?: "Không có"}") // Xử lý trường notes có thể null
+                        Text("📝 Ghi chú: ${item.notes ?: "Không có"}")
                         Row(modifier = Modifier.padding(top = 8.dp)) {
                             IconButton(onClick = {
                                 date = item.visitDate
@@ -197,8 +196,7 @@ fun SoKhamThaiScreen(navController: NavHostController, userId: String) {
                                 weight = item.weight
                                 bloodPressure = item.bloodPressure
                                 fetalHeartRate = item.fetalHeartRate
-                                note = item.notes ?: "" // Gán giá trị rỗng nếu notes là null
-                                isEditing = true
+                                note = item.notes ?: ""
                                 editId = item.visitId
                                 showForm = true
                             }) {
@@ -269,7 +267,7 @@ fun FormField(label: String, value: String, onValueChange: (String) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
-        colors = OutlinedTextFieldDefaults.colors( // Thêm styling cho TextField
+        colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color(0xFFFFC1CC),
             unfocusedBorderColor = Color(0xFFB2F7EF),
             focusedLabelColor = Color(0xFF4C4C6D),

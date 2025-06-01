@@ -40,7 +40,7 @@ interface PregnancyApi {
 }
 
 object PregnancyRetrofitInstance {
-    private const val BASE_URL = "   https://cd89-2001-ee0-4b6d-f0a0-bc15-4b82-50c3-ee65.ngrok-free.app/mevabe_api/"
+    private const val BASE_URL = " https://2629-2401-d800-f531-9420-9015-e99e-277c-272a.ngrok-free.app/mevabe_api/"
 
     val api: PregnancyApi by lazy {
         Retrofit.Builder()

@@ -14,7 +14,7 @@ import com.example.ltdd.remote.ActivityApiService
 
 object RetrofitClient {
 
-    private const val BASE_URL = "https://cd89-2001-ee0-4b6d-f0a0-bc15-4b82-50c3-ee65.ngrok-free.app/mevabe_api/"
+    private const val BASE_URL = " https://2629-2401-d800-f531-9420-9015-e99e-277c-272a.ngrok-free.app/mevabe_api/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -36,7 +36,6 @@ object RetrofitClient {
             .create(SoKhamThaiService::class.java)
     }
 
-    // Service cho Đăng nhập/Xác thực
     val authInstance: LoginService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -46,7 +45,6 @@ object RetrofitClient {
             .create(LoginService::class.java)
     }
 
-    // Service cho Bài viết về Thực phẩm
     val foodPostService: FoodPostService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -56,7 +54,6 @@ object RetrofitClient {
             .create(FoodPostService::class.java)
     }
 
-    // Service cho Dữ liệu tăng trưởng (GrowthScreen)
     val growthService: GrowthService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -94,4 +91,37 @@ object RetrofitClient {
             .build()
             .create(ActivityApiService::class.java)
     }
-}
+    val crisisWeekService: CrisisWeekService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create(CrisisWeekService::class.java)
+    }
+    val referenceProductService: ReferenceProductService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create(ReferenceProductService::class.java)
+    }
+    val vitaminApiService: VitaminApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+        .create(VitaminApiService::class.java)
+    }
+    val birthPlanApiService: BirthPlanApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+        .create(BirthPlanApiService::class.java)
+    }
+    }
+

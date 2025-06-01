@@ -38,8 +38,8 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-import com.example.ltdd.models.GrowthModel // Thay vì PregnancyData
-import com.example.ltdd.remote.RetrofitClient // Giữ nguyên
+import com.example.ltdd.models.GrowthModel
+import com.example.ltdd.remote.RetrofitClient
 
 private val PinkPastel = Color(0xFFFFF1F8)
 private val MintPastel = Color(0xFFE6F8F7)
@@ -49,7 +49,7 @@ private val pastelGradient = Brush.verticalGradient(
 
 class GrowthViewModel(private val userId: String) : ViewModel() {
     private val _growthData = MutableStateFlow<List<GrowthModel>>(emptyList())
-    val growthData: StateFlow<List<GrowthModel>> = _growthData // Đổi tên biến và kiểu
+    val growthData: StateFlow<List<GrowthModel>> = _growthData
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
     private val _errorMsg = MutableStateFlow<String?>(null)
@@ -141,7 +141,6 @@ fun GrowthScreen(
                     modifier = Modifier.padding(top = 40.dp)
                 )
                 else -> {
-                    // Kiểm tra dữ liệu GrowthModel
                     val info = data.firstOrNull { it.week?.toIntOrNull() == selectedWeek }
                     if (info == null) {
                         Text(
@@ -183,12 +182,15 @@ private fun WeekCircle(week: Int, selected: Boolean, onClick: () -> Unit) {
         )
     }
 }
-
 @Composable
 private fun DetailCard(d: GrowthModel) {
-     val baseUrl = " https://cd89-2001-ee0-4b6d-f0a0-bc15-4b82-50c3-ee65.ngrok-free.app/mevabe_api/"
+
+    val baseUrl = "https://2629-2401-d800-f531-9420-9015-e99e-277c-272a.ngrok-free.app/mevabe_api/"
+
+
     val fullImageUrl = d.image?.let { if (it.startsWith("http")) it else baseUrl + it } ?: ""
-    Log.d("ImageLoadDebug", "Final Image URL to load: $fullImageUrl") // Đảm bảo dòng này có
+
+    Log.d("ImageLoadDebug", "Final Image URL to load: $fullImageUrl")
 
     Card(
         shape = RoundedCornerShape(12.dp),
@@ -205,18 +207,43 @@ private fun DetailCard(d: GrowthModel) {
                 item {
                     AsyncImage(
                         model = fullImageUrl,
-                        contentDescription = null,
+                        contentDescription = "Growth Image",
                         modifier = Modifier
                             .fillMaxWidth()
                             .aspectRatio(1f)
-                            .clip(RoundedCornerShape(12.dp)),
-                        contentScale = ContentScale.Crop
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(Color.LightGray),
+                        contentScale = ContentScale.Crop,
+
                     )
                 }
             }
-            item { InfoRow("Chiều cao", d.length ?: "--", "📏") }
-            item { InfoRow("Cân nặng", d.weight ?: "--", "⚖️") }
-            item { InfoRow("Mô tả",     d.description ?: "--", "📝") }
+
+            item {
+                InfoRow(
+                    "Chiều cao",
+                    d.length?.let { "%.1f".format(it) } ?: "--",
+                    "📏"
+                )
+            }
+            item {
+                InfoRow("Tuần", d.week ?: "--", "📅")
+            }
+            item {
+                InfoRow(
+                    "Cân nặng",
+                    d.weight?.let { "%.2f".format(it) } ?: "--",
+                    "⚖️"
+                )
+            }
+
+            item {
+                InfoRow(
+                    "Mô tả",
+                    d.description ?: "--",
+                    "📝"
+                )
+            }
 
         }
     }

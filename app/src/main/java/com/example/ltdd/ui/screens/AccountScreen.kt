@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.ltdd.R
 import com.example.ltdd.ui.components.BottomNavigationBar
+import com.example.ltdd.ui.theme.mediumPink
 
 val lightBlue = Color(0xFFE1F5FE)
 val mediumBlue = Color(0xFF00BCD4)
@@ -35,7 +36,7 @@ data class AccountMenuItem(val title: String, val icon: ImageVector, val onClick
 
 fun logout(context: Context, navController: NavController) {
     val sharedPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-    sharedPref.edit().clear().apply()  // Xóa dữ liệu đăng nhập
+    sharedPref.edit().clear().apply()
 
     navController.navigate("login") {
         popUpTo(0) { inclusive = true }

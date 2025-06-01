@@ -174,7 +174,7 @@ fun NutritionInfoCards() {
                 Icon(
                     imageVector = Icons.Default.LocalDining,
                     contentDescription = "Icon",
-                    tint = Color(0xFF2E7D32), // Màu xanh đậm
+                    tint = Color(0xFF2E7D32),
                     modifier = Modifier.size(40.dp)
                 )
                 Spacer(modifier = Modifier.width(12.dp))
@@ -196,7 +196,6 @@ fun NutritionInfoCards() {
             }
         }
 
-        // Card 2
         Card(
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF2C6)), // Màu vàng nhạt
@@ -206,7 +205,7 @@ fun NutritionInfoCards() {
                 Icon(
                     imageVector = Icons.Default.MenuBook,
                     contentDescription = "Icon",
-                    tint = Color(0xFFB71C1C), // Màu đỏ đậm
+                    tint = Color(0xFFB71C1C),
                     modifier = Modifier.size(40.dp)
                 )
                 Spacer(modifier = Modifier.width(12.dp))

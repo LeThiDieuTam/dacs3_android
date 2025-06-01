@@ -417,7 +417,7 @@ fun loadPregnancyInfo(
     userId: String,
     onResult: (week: Int, length: Double, weight: Double, dueDate: String) -> Unit
 ) {
-    val url = "  https://cd89-2001-ee0-4b6d-f0a0-bc15-4b82-50c3-ee65.ngrok-free.app/mevabe_api/get_pregnancy.php?user_id=$userId"
+    val url = "  https://2629-2401-d800-f531-9420-9015-e99e-277c-272a.ngrok-free.app/mevabe_api/get_pregnancy.php?user_id=$userId"
     val request = Request.Builder().url(url).build()
 
     client.newCall(request).enqueue(object : Callback {
@@ -449,7 +449,7 @@ fun updatePregnancyInfo(
     weight: Double,
     dueDate: String
 ): Boolean {
-    val url = "  https://cd89-2001-ee0-4b6d-f0a0-bc15-4b82-50c3-ee65.ngrok-free.app/mevabe_api/save_pregnancy.php\n"
+    val url = "  https://2629-2401-d800-f531-9420-9015-e99e-277c-272a.ngrok-free.app/mevabe_api/save_pregnancy.php\n"
 
     val formBody = FormBody.Builder()
         .add("user_id", userId)

@@ -87,12 +87,27 @@ val growthGuides = listOf(
 )
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CareGuideScreen(
     navController: NavHostController,
     userId: String
 ) {
-    Scaffold { insets ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Cẩm nang chăm sóc") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.Default.ExpandLess, // Bạn có thể thay bằng Icons.Default.ArrowBack nếu muốn
+                            contentDescription = "Quay lại"
+                        )
+                    }
+                }
+            )
+        }
+    ) { insets ->
         LazyColumn(
             modifier = Modifier
                 .padding(insets)
@@ -106,6 +121,7 @@ fun CareGuideScreen(
         }
     }
 }
+
 
 @Composable
 private fun GuideCard(guide: Guide) {

@@ -27,11 +27,9 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-// Import các class từ các package mới
 import com.example.ltdd.models.VaccinationData
 import com.example.ltdd.remote.RetrofitClient
 
-// === ViewModel cho MedicalRecordScreen ===
 class MedicalRecordViewModel(private val userId: String) : ViewModel() {
 
     private val _vaccinationList = MutableStateFlow<List<VaccinationData>>(emptyList())
@@ -67,7 +65,6 @@ class MedicalRecordViewModel(private val userId: String) : ViewModel() {
 
     fun updateVaccinationStatus(context: Context, updatedShot: VaccinationData) = viewModelScope.launch {
         try {
-            // Cập nhật trạng thái trong danh sách hiện tại trước khi gọi API
             _vaccinationList.value = _vaccinationList.value.map {
                 if (it.id == updatedShot.id) updatedShot else it
             }
@@ -81,7 +78,7 @@ class MedicalRecordViewModel(private val userId: String) : ViewModel() {
 
         } catch (e: Exception) {
             Log.e("MedicalRecordVM", "Lỗi cập nhật: ${e.message}")
-            // Hoàn lại trạng thái nếu cập nhật API thất bại (tùy chọn)
+
             _vaccinationList.value = _vaccinationList.value.map {
                 if (it.id == updatedShot.id) updatedShot.copy(isInjected = !updatedShot.isInjected) else it
             }
@@ -90,7 +87,6 @@ class MedicalRecordViewModel(private val userId: String) : ViewModel() {
     }
 }
 
-// === ViewModelFactory cho MedicalRecordViewModel ===
 class MedicalRecordViewModelFactory(private val userId: String) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(model: Class<T>): T {
         require(model.isAssignableFrom(MedicalRecordViewModel::class.java))
@@ -99,7 +95,6 @@ class MedicalRecordViewModelFactory(private val userId: String) : ViewModelProvi
     }
 }
 
-// === Composable MedicalRecordScreen ===
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MedicalRecordScreen(navController: NavHostController, userId: String) {
@@ -108,7 +103,6 @@ fun MedicalRecordScreen(navController: NavHostController, userId: String) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    // Collect các StateFlow từ ViewModel
     val vaccinationList by viewModel.vaccinationList.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val errorMsg by viewModel.errorMsg.collectAsState()
@@ -140,7 +134,6 @@ fun MedicalRecordScreen(navController: NavHostController, userId: String) {
                 errorMsg = errorMsg,
                 vaccinations = vaccinationList
             ) { updatedShot ->
-                // Gọi hàm update trong ViewModel
                 viewModel.updateVaccinationStatus(context, updatedShot)
             }
         }
@@ -188,7 +181,7 @@ fun VaccinationList(
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.medium,
                 colors = CardDefaults.elevatedCardColors(
-                    containerColor = Color(0xFFE3F2FD) // Màu nền xanh pastel nhẹ
+                    containerColor = Color(0xFFE3F2FD)
                 ),
                 elevation = CardDefaults.elevatedCardElevation(8.dp)
             ) {
@@ -199,7 +192,7 @@ fun VaccinationList(
                 ) {
                     Text(
                         text = shot.vaccineName,
-                        style = MaterialTheme.typography.titleMedium.copy(color = Color(0xFFD81B60)) // Hồng đậm
+                        style = MaterialTheme.typography.titleMedium.copy(color = Color(0xFFD81B60))
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
@@ -230,8 +223,8 @@ fun VaccinationList(
                                 onCheckedChange(shot.copy(isInjected = it))
                             },
                             colors = CheckboxDefaults.colors(
-                                checkedColor = Color(0xFFF48FB1), // hồng pastel
-                                uncheckedColor = Color(0xFF90CAF9), // xanh nhạt
+                                checkedColor = Color(0xFFF48FB1),
+                                uncheckedColor = Color(0xFF90CAF9),
                                 checkmarkColor = Color.White
                             )
                         )
